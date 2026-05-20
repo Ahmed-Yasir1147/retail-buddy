@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Retail System — Tabular Analytics</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="javascript/tabular_analytics.js" defer></script>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="site_header">
+    <nav class="navbar">
+      <div class="nav_brand">RETAIL SYSTEM</div>
+      <ul class="nav_links">
+        <li><a href="index.html" class="nav_link">HOME</a></li>
+        <li><a href="sales.html" class="nav_link">SALES</a></li>
+        <li><a href="products.html" class="nav_link">PRODUCTS</a></li>
+        <li><a href="tabular_analytics.html" class="nav_link active">TABULAR ANALYTICS</a></li>
+        <li><a href="graphs.html" class="nav_link">GRAPHS</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- MAIN -->
+  <main class="main_content">
+
+    <!-- FILTER BAR -->
+    <div class="filter_bar">
+
+      <!-- Time Range Dropdown (left) -->
+      <div class="filter_left">
+        <select class="filter_select filter_timerange" id="analytics_timerange">
+          <option value="detailed" selected>Detailed Day</option>
+          <option value="daily">Daily</option>
+          <option value="monthly">Monthly</option>
+          <option value="yearly">Yearly</option>
+        </select>
+      </div>
+
+      <!-- Year / Month / Day Dropdowns (right) -->
+      <div class="filter_right">
+        <select class="filter_select filter_time" id="analytics_year">
+          <option value="2026">2026</option>
+          <option value="2025">2025</option>
+          <option value="2024">2024</option>
+        </select>
+
+        <select class="filter_select filter_time" id="analytics_month">
+          <option value="1">January</option>
+          <option value="2">February</option>
+          <option value="3">March</option>
+          <option value="4">April</option>
+          <option value="5">May</option>
+          <option value="6">June</option>
+          <option value="7">July</option>
+          <option value="8">August</option>
+          <option value="9">September</option>
+          <option value="10">October</option>
+          <option value="11">November</option>
+          <option value="12">December</option>
+        </select>
+
+        <select class="filter_select filter_time" id="analytics_day">
+        </select>
+      </div>
+
+    </div>
+
+    <!-- ─── TABLE ─── -->
+    <div class="table_wrapper">
+      <table class="data_table" id="analytics_table">
+        <thead>
+          <tr id="analytics_table_head">
+            <th>Sale ID</th>
+            <th>Time</th>
+            <th>Products</th>
+            <th>Price ($)</th>
+            <th>Profit ($)</th>
+          </tr>
+        </thead>
+        <tbody id="analytics_table_body">
+          <tr>
+            <td id="analytics_row_1_id">S1031</td>
+            <td id="analytics_row_1_time">14:15</td>
+            <td id="analytics_row_1_products">'Sweets Box (x2)', 'Cola'</td>
+            <td id="analytics_row_1_price">15.50</td>
+            <td id="analytics_row_1_profit">6.20</td>
+          </tr>
+          <tr>
+            <td id="analytics_row_2_id">S1032</td>
+            <td id="analytics_row_2_time">14:18</td>
+            <td id="analytics_row_2_products">'Bread', 'Butter'</td>
+            <td id="analytics_row_2_price">5.00</td>
+            <td id="analytics_row_2_profit">2.10</td>
+          </tr>
+          <tr>
+            <td id="analytics_row_3_id">S1033</td>
+            <td id="analytics_row_3_time">14:21</td>
+            <td id="analytics_row_3_products">'Sweets Box (x2)'</td>
+            <td id="analytics_row_3_price">12.00</td>
+            <td id="analytics_row_3_profit">3.70</td>
+          </tr>
+          <tr>
+            <td id="analytics_row_4_id">S1034</td>
+            <td id="analytics_row_4_time">14:17</td>
+            <td id="analytics_row_4_products">'Sweets Box (x2)', 'Cola'</td>
+            <td id="analytics_row_4_price">15.50</td>
+            <td id="analytics_row_4_profit">6.20</td>
+          </tr>
+          <tr>
+            <td id="analytics_row_5_id">S1035</td>
+            <td id="analytics_row_5_time">14:29</td>
+            <td id="analytics_row_5_products">'Sweets Box (x2)', 'Cola'</td>
+            <td id="analytics_row_5_price">15.50</td>
+            <td id="analytics_row_5_profit">6.20</td>
+          </tr>
+        </tbody>
+
+        <!-- TOTALS ROW -->
+        <tfoot>
+          <tr class="table_totals_row">
+            <td colspan="3">DAILY AGGREGATE TOTAL</td>
+            <td id="analytics_total_price">$1,412.75</td>
+            <td id="analytics_total_profit">$565.10</td>
+          </tr>
+        </tfoot>
+
+      </table>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site_footer">
+        <span class="footer_text">Retail Buddy | Semester Project | 2026</span>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Retail System — Sales</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- HEADER / NAV -->
+  <header class="site_header">
+        <nav class="navbar">
+            <div class="nav_brand">RETAIL BUDDY</div>
+            <ul class="nav_links">
+                <li><a href="index.html" class="nav_link">HOME</a></li>
+                <li><a href="sales.html" class="nav_link active">SALES</a></li>
+                <li><a href="products.html" class="nav_link">PRODUCTS</a></li>
+                <li><a href="tabular_analytics.html" class="nav_link">TABULAR ANALYTICS</a></li>
+                <li><a href="graphs.html" class="nav_link">GRAPHS</a></li>
+            </ul>
+        </nav>
+    </header>
+
+  <!-- MAIN -->
+  <main class="main_content">
+    <h1 class="page_title">Today's Sales</h1>
+
+    <div class="table_wrapper">
+      <table class="data_table" id="sales_table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Products</th>
+            <th>Price</th>
+            <th>Profit</th>
+          </tr>
+        </thead>
+        <tbody id="sales_table_body">
+            <!-- Dummy data -->
+          <tr>
+            <td id="sales_row_1_id">S1001</td>
+            <td id="sales_row_1_product">Sweets Box (10x Small)</td>
+            <td id="sales_row_1_price">$25.00</td>
+            <td id="sales_row_1_profit">$5.00</td>
+          </tr>
+          <tr>
+            <td id="sales_row_2_id">S1002</td>
+            <td id="sales_row_2_product">Sweets Deluxe Assortment</td>
+            <td id="sales_row_2_price">$45.00</td>
+            <td id="sales_row_2_profit">$10.00</td>
+          </tr>
+          <tr>
+            <td id="sales_row_3_id">S1003</td>
+            <td id="sales_row_3_product">Sweets Gift Box (Large)</td>
+            <td id="sales_row_3_price">$60.00</td>
+            <td id="sales_row_3_profit">$12.00</td>
+          </tr>
+          <tr>
+            <td id="sales_row_4_id">S1004</td>
+            <td id="sales_row_4_product">Sweets Gift Box (Large)</td>
+            <td id="sales_row_4_price">$45.00</td>
+            <td id="sales_row_4_profit">$12.00</td>
+          </tr>
+          <tr>
+            <td id="sales_row_5_id">S1005</td>
+            <td id="sales_row_5_product">Sweets Box (10x Small)</td>
+            <td id="sales_row_5_price">$60.00</td>
+            <td id="sales_row_5_profit">$12.00</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <!-- FLOATING ADD BUTTON -->
+  <a href="#" class="fab" id="sales_fab">
+    <span class="fab_icon">+</span>
+    <span class="fab_label">Add Sale</span>
+  </a>
+
+  <!-- FOOTER -->
+  <footer class="site_footer">
+    <span class="footer_text">Retail Buddy | Semester Project | 2026</span>
+  </footer>
+
+</body>
+</html>

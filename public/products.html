@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Retail System — Products</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- HEADER / NAV -->
+  <header class="site_header">
+        <nav class="navbar">
+            <div class="nav_brand">RETAIL BUDDY</div>
+            <ul class="nav_links">
+                <li><a href="index.html" class="nav_link">HOME</a></li>
+                <li><a href="sales.html" class="nav_link">SALES</a></li>
+                <li><a href="products.html" class="nav_link active">PRODUCTS</a></li>
+                <li><a href="tabular_analytics.html" class="nav_link">TABULAR ANALYTICS</a></li>
+                <li><a href="graphs.html" class="nav_link">GRAPHS</a></li>
+            </ul>
+        </nav>
+    </header>
+
+  <!-- MAIN -->
+  <main class="main_content">
+    <h1 class="page_title">Products</h1>
+
+    <div class="table_wrapper">
+      <table class="data_table" id="product_table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Profit</th>
+            <th>Quantity</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="product_table_body">
+          <tr>
+            <td id="product_row_1_id">P1001</td>
+            <td id="product_row_1_name">Sweets Box (10x Small)</td>
+            <td id="product_row_1_price">$25.00</td>
+            <td id="product_row_1_profit">$5.00</td>
+            <td id="product_row_1_quantity">50</td>
+            <td>
+              <div class="action_buttons">
+                <button class="btn_edit">Edit</button>
+                <button class="btn_delete">Delete</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td id="product_row_2_id">P1002</td>
+            <td id="product_row_2_name">Sweets Deluxe Assortment</td>
+            <td id="product_row_2_price">$45.00</td>
+            <td id="product_row_2_profit">$10.00</td>
+            <td id="product_row_2_quantity">30</td>
+            <td>
+              <div class="action_buttons">
+                <button class="btn_edit">Edit</button>
+                <button class="btn_delete">Delete</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td id="product_row_3_id">P1003</td>
+            <td id="product_row_3_name">Sweets Gift Box (Large)</td>
+            <td id="product_row_3_price">$60.00</td>
+            <td id="product_row_3_profit">$12.00</td>
+            <td id="product_row_3_quantity">20</td>
+            <td>
+              <div class="action_buttons">
+                <button class="btn_edit">Edit</button>
+                <button class="btn_delete">Delete</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td id="product_row_4_id">P1004</td>
+            <td id="product_row_4_name">Sweets Gift Box (Large)</td>
+            <td id="product_row_4_price">$45.00</td>
+            <td id="product_row_4_profit">$12.00</td>
+            <td id="product_row_4_quantity">0</td>
+            <td>
+              <div class="action_buttons">
+                <button class="btn_edit">Edit</button>
+                <button class="btn_delete">Delete</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td id="product_row_5_id">P1005</td>
+            <td id="product_row_5_name">Sweets Box (10x Small)</td>
+            <td id="product_row_5_price">$60.00</td>
+            <td id="product_row_5_profit">$12.00</td>
+            <td id="product_row_5_quantity">15</td>
+            <td>
+              <div class="action_buttons">
+                <button class="btn_edit">Edit</button>
+                <button class="btn_delete">Delete</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <!-- FLOATING ADD BUTTON -->
+  <a href="#" class="fab" id="product_fab">
+    <span class="fab_icon">+</span>
+    <span class="fab_label">Add Product</span>
+  </a>
+
+  <!-- FOOTER -->
+  <footer class="site_footer">
+    <span class="footer_text">Retail Buddy | Semester Project | 2026</span>
+  </footer>
+
+</body>
+</html>

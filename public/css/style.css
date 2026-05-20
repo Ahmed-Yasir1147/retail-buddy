@@ -1,0 +1,659 @@
+/* ── CSS Variables ── */
+:root {
+    --primary: #2e4057;
+    --nav-bg: #2e4057;
+    --nav-active: #3b5068;
+    --nav-underline: #7b5ea7;
+    --accent-teal: #1a9c7b;
+    --accent-dark: #1e3a5f;
+    --green-active: #27ae60;
+    --red-out: #e74c3c;
+
+    --bg-page: #dce3ea;
+    --card-bg: #ffffff;
+    --card-border: #e2e8f0;
+    --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --card-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.14);
+
+    --text-primary: #1a202c;
+    --text-secondary: #4a5568;
+    --text-muted: #718096;
+
+    --font-main: sans-serif;
+    --font-condensed: system-ui;
+
+    --radius: 10px;
+    --transition: 0.22s ease;
+
+    --button-color: #4b6b8a;
+    --box-shadow: rgba(30, 67, 58, 0.3)
+}
+
+/* ── Reset & Base ── */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 
+   NAVBAR
+*/
+.site_header {
+    background-color: var(--nav-bg);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+}
+
+.navbar {
+    display: flex;
+    align-items: stretch;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    height: 65px;
+}
+
+.nav_brand {
+    font-family: var(--font-condensed);
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    padding-right: 32px;
+    white-space: nowrap;
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
+    margin-right: 8px;
+}
+
+.nav_links {
+    list-style: none;
+    display: flex;
+    align-items: stretch;
+    margin-left: auto;
+}
+
+.nav_links li {
+    display: flex;
+    align-items: stretch;
+}
+
+.nav_link {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    font-family: var(--font-condensed);
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    color: rgba(255, 255, 255, 0.78);
+    text-decoration: none;
+    position: relative;
+    transition: color var(--transition), background-color var(--transition);
+    text-align: center;
+}
+
+.nav_link:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.07);
+}
+
+/* Active nav item — underline + slight bg */
+.nav_link.active {
+    color: #ffffff;
+    background-color: var(--nav-active);
+}
+
+
+
+/* 
+   MAIN CONTENT
+ */
+.main_content {
+    flex: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 24px 48px;
+    width: 100%;
+}
+
+.page_title {
+    font-family: var(--font-condensed);
+    font-size: 1.9rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--text-primary);
+    margin-bottom: 28px;
+}
+
+/* ─── Sections ─── */
+.home_section {
+    margin-bottom: 36px;
+}
+
+.section_heading {
+    font-family: var(--font-condensed);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 14px;
+}
+
+/* ─── Cards Row ─── */
+.cards_row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+/* ─── Generic Card ─── */
+.home_card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    box-shadow: var(--card-shadow);
+    padding: 18px 20px;
+    flex: 1 1 160px;
+    min-width: 150px;
+    transition:
+        transform var(--transition),
+        box-shadow var(--transition);
+    cursor: default;
+}
+
+.home_card:hover {
+    transform: translateY(-4px) scale(1.015);
+    box-shadow: var(--card-shadow-hover);
+}
+
+/* ─── Card Header row (label + icon) ─── */
+.card_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.card_label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    letter-spacing: 0.02em;
+}
+
+.card_icon {
+    display: flex;
+    align-items: center;
+    opacity: 0.75;
+}
+
+/* 
+   HIGHLIGHTS — individual card styles
+ */
+
+/* Shared big value style */
+.highlight_value {
+    font-family: var(--font-condensed);
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: var(--accent-teal);
+    line-height: 1.1;
+}
+
+/* Total Products value is dark blue, not teal */
+.products_value {
+    color: var(--accent-dark);
+}
+
+/* ─── Best Product card ─── */
+.best_product_body {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+}
+
+
+.best_product_name {
+    font-family: var(--font-condensed);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--text-primary);
+}
+
+.best_product_profit {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.profit_badge {
+    font-weight: 700;
+    font-size: 0.92rem;
+    color: var(--accent-teal);
+}
+
+.profit_label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* ─── Stock Status card ─── */
+.card_stock_status {
+    min-width: 180px;
+}
+
+.stock_header_icons {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.stock_values_row {
+    display: flex;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 4px;
+}
+
+.stock_block {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 8px 8px;
+}
+
+.stock_active {
+    background-color: var(--green-active);
+}
+
+.stock_out {
+    background-color: var(--red-out);
+}
+
+.stock_number {
+    font-family: var(--font-condensed);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1;
+}
+
+.stock_status_label {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.92);
+    margin-top: 4px;
+    letter-spacing: 0.03em;
+}
+
+
+
+/*
+   SALES SUMMARY — individual card styles
+*/
+.card_number {
+    font-size: 0.86rem;
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+.card_row_detail {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-top: 10px;
+}
+
+.detail_label {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+}
+
+.detail_value {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--accent-teal);
+}
+
+/* 
+   QUICK ACTION BUTTONS
+ */
+.buttons_row {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+}
+
+.home_button {
+    flex: 1 1 140px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 13px 20px;
+    background-color: var(--button-color);
+    color: #ffffff;
+    font-family: var(--font-condensed);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-decoration: none;
+    border-radius: var(--radius);
+    border: 2px solid transparent;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    transition: background-color var(--transition),
+        transform var(--transition),
+        box-shadow var(--transition),
+        border-color var(--transition);
+}
+
+.home_button:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 20px var(--box-shadow);
+}
+
+
+@media (max-width: 768px) {
+    .buttons_row {
+        flex-direction: column;
+    }
+}
+
+/* 
+   FOOTER
+ */
+.site_footer {
+    background-color: var(--nav-bg);
+    text-align: center;
+    padding: 25px 50px;
+}
+
+.footer_text {
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.55);
+    letter-spacing: 0.04em;
+}
+
+/* 
+   RESPONSIVE
+ */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        height: auto;
+        padding: 12px 16px;
+        gap: 10px;
+    }
+
+    .nav_brand {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        padding-bottom: 10px;
+        padding-right: 0;
+    }
+
+    .nav_links {
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+
+    .nav_link {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+
+    .cards_row {
+        flex-direction: column;
+    }
+
+    .highlight_value {
+        font-size: 1.6rem;
+    }
+}
+
+/* 
+   TABLE
+*/
+.table_wrapper {
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+}
+
+.data_table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--card-bg);
+  font-size: 0.93rem;
+}
+
+.data_table thead tr {
+  background-color: var(--nav-bg);
+}
+
+.data_table thead th {
+  padding: 14px 20px;
+  text-align: left;
+  font-family: var(--font-condensed);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+}
+
+.data_table tbody tr {
+  border-bottom: 1px solid var(--card-border);
+  transition: background-color var(--transition);
+}
+
+.data_table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.data_table tbody tr:nth-child(even) {
+  background-color: #f4f7fa;
+}
+
+.data_table tbody tr:hover {
+  background-color: #e1e2e3;
+}
+
+.data_table tbody td {
+  padding: 14px 20px;
+  color: var(--text-primary);
+}
+
+/* 
+   FLOATING ACTION BUTTON (FAB)
+*/
+.fab {
+  position: fixed;
+  bottom: 80px;
+  right: 32px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 22px;
+  background-color: var(--button-color);
+  color: #ffffff;
+  font-family: var(--font-condensed);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  border-radius: 50px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.22);
+  transition: background-color var(--transition),
+              transform var(--transition),
+              box-shadow var(--transition),;
+  z-index: 200;
+}
+
+.fab:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 8px 24px var(--box-shadow);
+}
+
+.fab:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.fab_icon {
+  font-size: 1.2rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.fab_label {
+  line-height: 1;
+}
+
+/* 
+   Product Page Specific
+*/
+.action_buttons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.btn_edit,
+.btn_delete {
+  padding: 6px 16px;
+  font-family: var(--font-condensed);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform var(--transition),
+              box-shadow var(--transition),
+              filter var(--transition);
+}
+
+.btn_edit {
+  background-color: var(--green-active);
+  color: #ffffff;
+}
+
+.btn_delete {
+  background-color: var(--red-out);
+  color: #ffffff;
+}
+
+.btn_edit:hover {
+  filter: brightness(1.12);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(39,174,96,0.35);
+}
+
+.btn_delete:hover {
+  filter: brightness(1.12);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(231,76,60,0.35);
+}
+
+.btn_edit:active,
+.btn_delete:active {
+  transform: translateY(0) scale(0.97);
+  filter: brightness(0.95);
+  box-shadow: none;
+}
+
+.table_totals_row {
+  background-color: var(--nav-bg);
+}
+
+.table_totals_row td {
+  padding: 14px 20px;
+  color: #ffffff;
+  font-family: var(--font-condensed);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+/*
+   FILTER BAR
+*/
+.filter_bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.filter_left {
+  display: flex;
+  align-items: center;
+}
+
+.filter_right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.filter_select {
+  padding: 8px 32px 8px 14px;
+  font-family: var(--font-condensed);
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  border-radius: 6px;
+  background-color: var(--button-color);
+  color: #ffffff;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  transition: border-color var(--transition), box-shadow var(--transition);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+
+}
+
+
+.filter_time {
+  background-color: var(--button-color);
+  color: #ffffff;
+}
+
+.filter_select:hover,
+.filter_select:focus {
+  outline: none;
+}
+
+.filter_select:hover {
+  transform: translateY(-1px) scale(1.04);
+}
+
+.filter_select option:hover {
+    background-color: var(--primary);
+}
