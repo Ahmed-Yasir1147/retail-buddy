@@ -1,13 +1,8 @@
 import mongoose from "mongoose";
 
-const mongoDB = "mongodb://127.0.0.1/retail_buddy";
+const mongoDB = "mongodb://localhost:27017/retailbuddy";
 
-async function main() {
+export async function main() {
   await mongoose.connect(mongoDB);
 }
 
-try {
-    main();
-} catch(error) {
-    console.log(error);
-}
