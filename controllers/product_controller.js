@@ -22,9 +22,25 @@ export const insertProduct = async (req, res, next) => {
 // GET: Fetches all products
 export const getProducts = async (req, res, next) => {
     try {
-        const products = await product.find({}).lean();
+        const products = await product.find({}).lean().sort({name: 1}).collation({ locale: 'en', strength: 2 });
         res.status(200).json(products);
     } catch(error) {
         next(createError("Getting prodcuts failed", 500))
+    }
+}
+
+// DELETE: Delete the given product
+export const deleteProduct = async (req, res, next) => {
+    try {
+        const id = req.params.id;
+        if (id) {
+            const deleted = await product.deleteOne({_id: id});
+            // 204 means we don't sending any response body
+            res.sendStatus(204);
+        } else {
+            next(createError("Missing id", 400));
+        }
+    } catch(error) {
+        next(createError("Deletion failed", 500));
     }
 }

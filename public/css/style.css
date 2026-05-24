@@ -128,7 +128,7 @@ body {
     flex: 1;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 32px 24px 48px;
+    padding: 20px 24px 48px;
     width: 100%;
 }
 
@@ -136,6 +136,7 @@ body {
     font-family: var(--font-condensed);
     font-size: 1.9rem;
     font-weight: 700;
+    padding-top: 10px;
     letter-spacing: 0.04em;
     color: var(--text-primary);
     margin-bottom: 28px;
@@ -387,7 +388,7 @@ body {
 .site_footer {
     background-color: var(--nav-bg);
     text-align: center;
-    padding: 25px 50px;
+    padding: 30px 0;
 }
 
 .footer_text {
@@ -431,6 +432,12 @@ body {
     .highlight_value {
         font-size: 1.6rem;
     }
+}
+
+.title_section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* 
@@ -486,16 +493,12 @@ body {
 }
 
 /* 
-   FLOATING ACTION BUTTON (FAB)
+   Add button
 */
-.fab {
-  position: fixed;
-  bottom: 80px;
-  right: 32px;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 14px 22px;
+.add_btn {
+  align-content: center;
+  padding: 20px;
+  margin: 10px;
   background-color: var(--button-color);
   color: #ffffff;
   font-family: var(--font-condensed);
@@ -503,30 +506,30 @@ body {
   font-weight: 700;
   letter-spacing: 0.06em;
   text-decoration: none;
-  border-radius: 50px;
+  border-radius: 25px;
   box-shadow: 0 4px 16px rgba(0,0,0,0.22);
   transition: background-color var(--transition),
               transform var(--transition),
               box-shadow var(--transition),;
-  z-index: 200;
 }
 
-.fab:hover {
+.add_btn:hover {
   transform: translateY(-3px) scale(1.04);
   box-shadow: 0 8px 24px var(--box-shadow);
+      filter: brightness(1.1);
 }
 
-.fab:active {
+.add_btn:active {
   transform: translateY(0) scale(0.97);
 }
 
-.fab_icon {
+.add_btn_icon {
   font-size: 1.2rem;
   font-weight: 800;
   line-height: 1;
 }
 
-.fab_label {
+.add_btn_label {
   line-height: 1;
 }
 
@@ -541,6 +544,7 @@ body {
 
 .btn_edit,
 .btn_delete {
+  margin-right: 3px;
   padding: 6px 16px;
   font-family: var(--font-condensed);
   font-size: 0.85rem;
@@ -565,13 +569,11 @@ body {
 }
 
 .btn_edit:hover {
-  filter: brightness(1.12);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(39,174,96,0.35);
 }
 
 .btn_delete:hover {
-  filter: brightness(1.12);
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(231,76,60,0.35);
 }
@@ -656,4 +658,115 @@ body {
 
 .filter_select option:hover {
     background-color: var(--primary);
+}
+
+/*
+   DIALOG
+*/
+
+.dialog {
+  background-color: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+  padding: 32px 28px 24px;
+  animation: dialog_in 0.2s ease;
+  margin: auto;
+  position: fixed;
+  top: 15%;
+  left: 30%;
+  height: 70%;
+  width: 40%;
+}
+
+.dialog_title {
+  font-family: var(--font-condensed);
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+}
+
+/* ─── Fields ─── */
+.dialog_body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.dialog_field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.dialog_label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: 0.03em;
+}
+
+.dialog_input {
+  padding: 10px 14px;
+  font-family: var(--font-main);
+  font-size: 0.92rem;
+  color: var(--text-primary);
+  background-color: var(--card-border);
+  border: none;
+  border-radius: 6px;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  outline: none;
+}
+
+.dialog_input:focus {
+  border-color: var(--primary);
+}
+
+.dialog_input::placeholder {
+  color: var(--text-muted);
+}
+
+/* ─── Action Buttons ─── */
+.dialog_actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.dialog_btn {
+  padding: 9px 24px;
+  font-family: var(--font-condensed);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  border: none;
+  border-radius: 6px;
+  transition: filter var(--transition),
+              transform var(--transition),
+              box-shadow var(--transition);
+}
+
+.dialog_cancel {
+  background-color: var(--bg-page);
+  color: var(--text-secondary);
+}
+
+.dialog_create {
+  background-color: var(--accent-teal);
+  color: #ffffff;
+}
+
+.dialog_cancel:hover {
+  transform: translateY(-2px);
+}
+
+.dialog_create:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(26, 156, 123, 0.3);
+}
+
+.dialog_btn:active {
+  transform: scale(0.97);
 }

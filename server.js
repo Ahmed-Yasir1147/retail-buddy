@@ -21,10 +21,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(logger);
-app.use(errorHandler);
-app.use(notFoundErrorHanlder);
+
 
 app.use("/api/products", productsRouter);
+
+
+app.get("/test", (req, res) => {
+  res.send("working");
+});
+
+app.use(notFoundErrorHanlder);
+app.use(errorHandler);
 
 main().then(() => {
     console.log("Database connected");
@@ -34,6 +41,7 @@ main().then(() => {
 }).catch((error) => {
     console.log(`Database error: ${error}`)
 });
+
 
 
 

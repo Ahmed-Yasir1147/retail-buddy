@@ -1,30 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Retail System — Sales</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
+
 <body>
 
   <!-- HEADER / NAV -->
   <header class="site_header">
-        <nav class="navbar">
-            <div class="nav_brand">RETAIL BUDDY</div>
-            <ul class="nav_links">
-                <li><a href="index.html" class="nav_link">HOME</a></li>
-                <li><a href="sales.html" class="nav_link active">SALES</a></li>
-                <li><a href="products.html" class="nav_link">PRODUCTS</a></li>
-                <li><a href="tabular_analytics.html" class="nav_link">TABULAR ANALYTICS</a></li>
-                <li><a href="graphs.html" class="nav_link">GRAPHS</a></li>
-            </ul>
-        </nav>
-    </header>
+    <nav class="navbar">
+      <div class="nav_brand">RETAIL BUDDY</div>
+      <ul class="nav_links">
+        <li><a href="index.html" class="nav_link">HOME</a></li>
+        <li><a href="sales.html" class="nav_link active">SALES</a></li>
+        <li><a href="products.html" class="nav_link">PRODUCTS</a></li>
+        <li><a href="tabular_analytics.html" class="nav_link">TABULAR ANALYTICS</a></li>
+        <li><a href="graphs.html" class="nav_link">GRAPHS</a></li>
+      </ul>
+    </nav>
+  </header>
 
   <!-- MAIN -->
   <main class="main_content">
-    <h1 class="page_title">Today's Sales</h1>
+
+    <div class="title_section">
+      <h1 class="page_title">Today's Sales</h1>
+      <a href="#" class="add_btn" id="sales_fab">
+        <span class="add_btn_icon">+</span>
+        <span class="add_btn_label">Add Sale</span>
+      </a>
+    </div>
 
     <div class="table_wrapper">
       <table class="data_table" id="sales_table">
@@ -37,7 +46,7 @@
           </tr>
         </thead>
         <tbody id="sales_table_body">
-            <!-- Dummy data -->
+          <!-- Dummy data -->
           <tr>
             <td id="sales_row_1_id">S1001</td>
             <td id="sales_row_1_product">Sweets Box (10x Small)</td>
@@ -73,11 +82,7 @@
     </div>
   </main>
 
-  <!-- FLOATING ADD BUTTON -->
-  <a href="#" class="fab" id="sales_fab">
-    <span class="fab_icon">+</span>
-    <span class="fab_label">Add Sale</span>
-  </a>
+
 
   <!-- FOOTER -->
   <footer class="site_footer">
@@ -85,4 +90,5 @@
   </footer>
 
 </body>
+
 </html>
