@@ -40,15 +40,15 @@
           </div>
 
           <div class="dialog_field">
-            <label class="dialog_label" for="product_quantity">Quantity</label>
-            <input class="dialog_input" type="number" id="product_quantity" placeholder="Stock available" min="0"
+            <label class="dialog_label" for="product_stock">Stock</label>
+            <input class="dialog_input" type="number" id="product_stock" placeholder="Stock available" min="0"
               step="1" required />
           </div>
 
         </div>
 
         <div class="dialog_actions">
-          <button class="dialog_btn dialog_cancel" id="product_dialog_cancel">Cancel</button>
+          <button class="dialog_btn dialog_cancel" id="product_dialog_cancel" type="button">Cancel</button>
           <button class="dialog_btn dialog_create" id="product_dialog_create" type="submit">Create</button>
         </div>
 
@@ -91,7 +91,7 @@
             <th>Name</th>
             <th>Price</th>
             <th>Profit</th>
-            <th>Quantity</th>
+            <th>Stock</th>
             <th>Action</th>
           </tr>
         </thead>

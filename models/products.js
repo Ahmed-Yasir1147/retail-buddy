@@ -5,7 +5,7 @@ const productSchema = new Schema(
         name: { type: String },
         price: { type: Number, min: 0 },
         cost: { type: Number, min: 0 },
-        quantity: { type: Number, min: 0 },
+        stock: { type: Number, min: 0 },
     }
 );
 

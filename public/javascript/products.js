@@ -5,7 +5,7 @@ const createProductBtn = document.querySelector("#product_dialog_create");
 const productName = document.querySelector("#product_name");
 const productPrice = document.querySelector("#product_price");
 const productCost = document.querySelector("#product_cost");
-const productQuantity = document.querySelector("#product_quantity");
+const productStock = document.querySelector("#product_stock");
 const createProductForm = document.querySelector("#create_product_form");
 const productTableBody = document.querySelector("#product_table_body");
 const baseUrl = "http://localhost:8000";
@@ -14,7 +14,6 @@ const url = `${baseUrl}/api/products`;
 fetchProducts();
 
 showProductDialogBtn.addEventListener("click", () => {
-    console.log(productDialog);
     productDialog.showModal();
 });
 
@@ -47,8 +46,8 @@ function fetchProducts() {
             price.textContent = product.price;
             const cost = document.createElement("td");
             cost.textContent = product.cost;
-            const quantity = document.createElement("td");
-            quantity.textContent = product.quantity;
+            const stock = document.createElement("td");
+            stock.textContent = product.stock;
             const buttons = document.createElement("td");
             const buttonsDiv = document.createElement("div");
             buttons.classList.add("action_buttons");
@@ -58,7 +57,7 @@ function fetchProducts() {
             const deleteButton = document.createElement("button");
             deleteButton.classList.add("btn_delete");
             deleteButton.textContent = "Delete";
-            deleteButton.addEventListener("click", () => {deleteProduct(product._id)});
+            deleteButton.addEventListener("click", () => { deleteProduct(product._id) });
             buttonsDiv.appendChild(deleteButton);
             buttonsDiv.appendChild(editButton);
             buttons.appendChild(buttonsDiv);
@@ -66,7 +65,7 @@ function fetchProducts() {
             tr.appendChild(name);
             tr.appendChild(price);
             tr.appendChild(cost);
-            tr.appendChild(quantity);
+            tr.appendChild(stock);
             tr.appendChild(buttons);
             productTableBody.appendChild(tr);
         }
@@ -76,61 +75,64 @@ function fetchProducts() {
 }
 
 function deleteProduct(id) {
-    fetch(`${url}/${id}`, {
-        method: "DELETE"
-    }).then((response) => {
-        console.log(response);
-        if (response.ok) {
-            console.log("Deletion successful");
-            fetchProducts();
-        } else {
-            throw new Error("Product deletion failed");
-        }
-    }).catch((error) => {
-        console.log("fuck");
-        console.error(error);
-    });
+    // confirming if user really wants to delete
+    if (confirm("Do you want to delete this product?")) {
+        fetch(`${url}/${id}`, {
+            method: "DELETE"
+        }).then((response) => {
+            console.log(response);
+            if (response.ok) {
+                console.log("Deletion successful");
+                fetchProducts();
+            } else {
+                throw new Error("Product deletion failed");
+            }
+        }).catch((error) => {
+            console.log("fuck");
+            console.error(error);
+        });
+    }
 }
 
 function createProduct(event) {
     event.preventDefault();
+        console.log(productStock);
     const name = productName.value;
     const price = parseFloat(productPrice.value);
     const cost = parseFloat(productCost.value);
-    const quantity = parseInt(productQuantity.value);
-    
+    const stock = parseInt(productStock.value);
+    console.log(stock);
+
     // cost can't be greater than price
     if (cost > price) {
         alert("Cost of product can't be greater than price!");
-
     } else {
         fetch(url, {
-        method: "POST",
-         headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(
-            {
-                name: name,
-                price: price,
-                cost: cost,
-                quantity: quantity
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(
+                {
+                    name: name,
+                    price: price,
+                    cost: cost,
+                    stock: stock
+                }
+            )
+        }).then((response) => {
+            if (response.ok) {
+                // products have changed so fetching again
+                fetchProducts();
+                productDialog.close();
+                productName.value = "";
+                productPrice.value = "";
+                productCost.value = "";
+                productStock.value = "";
             }
-        )
-    }).then((response) => {
-        console.log(response);
-        if (response.ok) {
-            // products have changed so fetching again
-            fetchProducts();
-            productDialog.close();
-            productName.value = "";
-            productPrice.value = "";
-            productCost.value = "";
-            productQuantity.value = "";
-        }
-    }).catch((error) => {
-        console.error(error);
-    });
+        }).catch((error) => {
+            console.error(error);
+        });
     }
 }
 

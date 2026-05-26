@@ -6,9 +6,59 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Retail System — Sales</title>
   <link rel="stylesheet" href="css/style.css" />
+  <script src="javascript/sales.js" defer></script>
 </head>
 
 <body>
+
+  <!-- ADD SALE DIALOG -->
+  <dialog class="sale_dialog_overlay" id="sale_dialog">
+    <div class="sale_dialog">
+
+      <!-- LEFT PANEL: Product Selection -->
+      <div class="sale_panel_left">
+
+        <div class="sale_search_bar">
+          <input type="text" class="sale_search_input" id="sale_search_input" placeholder="Search Products..." />
+          <span class="sale_search_icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+          </span>
+        </div>
+
+        <div class="sale_product_grid" id="sale_product_grid">
+
+        </div>
+      </div>
+
+      <!-- RIGHT PANEL: Current Sale -->
+      <div class="sale_panel_right">
+
+        <h2 class="sale_panel_title">Current Sale</h2>
+
+        <!-- Cart Items — JS will populate this -->
+        <div class="sale_cart" id="sale_cart">
+
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="sale_bottom_bar">
+          <div class="sale_totals">
+            <span class="sale_total_price"><span>TOTAL: Rs.</span><span id="sale_total_price">0</span></span>
+            <span class="sale_total_profit"><span>Profit: Rs.</span><span id="sale_total_profit">0</span></span>
+          </div>
+          <div class="sale_bottom_actions">
+            <button class="dialog_btn dialog_cancel" id="sale_dialog_cancel">Cancel</button>
+            <button class="dialog_btn dialog_create" id="sale_dialog_submit">Submit Sale</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </dialog>
 
   <!-- HEADER / NAV -->
   <header class="site_header">
@@ -29,10 +79,10 @@
 
     <div class="title_section">
       <h1 class="page_title">Today's Sales</h1>
-      <a href="#" class="add_btn" id="sales_fab">
+      <btn class="add_btn" id="show_sale_dialog_btn">
         <span class="add_btn_icon">+</span>
         <span class="add_btn_label">Add Sale</span>
-      </a>
+      </btn>
     </div>
 
     <div class="table_wrapper">
@@ -40,43 +90,14 @@
         <thead>
           <tr>
             <th>ID</th>
+            <th>Time</th>
             <th>Products</th>
             <th>Price</th>
             <th>Profit</th>
           </tr>
         </thead>
         <tbody id="sales_table_body">
-          <!-- Dummy data -->
-          <tr>
-            <td id="sales_row_1_id">S1001</td>
-            <td id="sales_row_1_product">Sweets Box (10x Small)</td>
-            <td id="sales_row_1_price">$25.00</td>
-            <td id="sales_row_1_profit">$5.00</td>
-          </tr>
-          <tr>
-            <td id="sales_row_2_id">S1002</td>
-            <td id="sales_row_2_product">Sweets Deluxe Assortment</td>
-            <td id="sales_row_2_price">$45.00</td>
-            <td id="sales_row_2_profit">$10.00</td>
-          </tr>
-          <tr>
-            <td id="sales_row_3_id">S1003</td>
-            <td id="sales_row_3_product">Sweets Gift Box (Large)</td>
-            <td id="sales_row_3_price">$60.00</td>
-            <td id="sales_row_3_profit">$12.00</td>
-          </tr>
-          <tr>
-            <td id="sales_row_4_id">S1004</td>
-            <td id="sales_row_4_product">Sweets Gift Box (Large)</td>
-            <td id="sales_row_4_price">$45.00</td>
-            <td id="sales_row_4_profit">$12.00</td>
-          </tr>
-          <tr>
-            <td id="sales_row_5_id">S1005</td>
-            <td id="sales_row_5_product">Sweets Box (10x Small)</td>
-            <td id="sales_row_5_price">$60.00</td>
-            <td id="sales_row_5_profit">$12.00</td>
-          </tr>
+         
         </tbody>
       </table>
     </div>

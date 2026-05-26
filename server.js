@@ -7,6 +7,7 @@ import { notFoundErrorHanlder } from './middleware/not_found_handler.js';
 import { logger } from './middleware/logger.js';
 import { main } from './config/database.js';
 import { error } from 'console';
+import { salesRouter } from './routes/sales.js';
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use(logger);
 
 
 app.use("/api/products", productsRouter);
+app.use("/api/sales", salesRouter);
 
 
 app.get("/test", (req, res) => {
