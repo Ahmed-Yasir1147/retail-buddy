@@ -8,6 +8,7 @@ import { logger } from './middleware/logger.js';
 import { main } from './config/database.js';
 import { error } from 'console';
 import { salesRouter } from './routes/sales.js';
+import { dashboardRouter } from './routes/dashboard.js';
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.use(logger);
 
 app.use("/api/products", productsRouter);
 app.use("/api/sales", salesRouter);
+app.use("/api/dashboard", dashboardRouter);
 
 
 app.get("/test", (req, res) => {

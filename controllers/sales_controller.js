@@ -40,11 +40,19 @@ export const insertSale = async (req, res, next) => {
 }
 
 // Fetch today sale record from newest to oldest
-export const getSales = async (req, res, next) => {
+export const getTodaySales = async (req, res, next) => {
     try {
-        const result = await sales.find().lean();
-        res.status(200).json(result);
+        const today = new Date();
+        // we just need today's date not current hour, min or seconds
+        today.setHours(0, 0, 0, 0);
+        const now = new Date();
+        const result = await sales.find({ createdAt: { $gte: today, $lte: now } }).lean();
+        const summary = await sales.aggregate([
+            { $match: { createdAt: { $gte: today, $lte: now } } }, 
+            { $group: { _id: null, totalPrice: { $sum: "$price" }, totalProfit: { $sum: "$profit" } } }]);
+        res.status(200).json({ sales: result, summary: summary[0] });
     } catch (error) {
+        console.log(error);
         return next(createError("Getting sales failed", 500))
     }
 }

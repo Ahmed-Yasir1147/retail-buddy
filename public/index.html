@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Retail System</title>
     <link rel="stylesheet" href="css/style.css" />
+    <script src="javascript/dashboard.js" defer></script>
 </head>
 
 <body>
@@ -52,7 +53,17 @@
                             </svg>
                         </span>
                     </div>
-                    <div class="card_value highlight_value" id="total_sales">$1,844.95</div>
+                    <div class="card_value highlight_value">
+                        <span>Rs. </span>
+                        <span id="total_sales">0</span>
+                    </div>
+                    <div class="card_row_detail">
+                        <span class="detail_label">Total Profit:</span>
+                        <span class="detail_value">
+                            <span>Rs.</span>
+                            <span id="total_profit"></span>
+                        </span>
+                    </div>
                 </div>
 
                 <!-- Card: Total Products -->
@@ -71,13 +82,13 @@
                             </svg>
                         </span>
                     </div>
-                    <div class="card_value highlight_value products_value" id="total_products">25</div>
+                    <div class="card_value highlight_value products_value" id="total_products">0</div>
                 </div>
 
                 <!-- Card: Best Product -->
                 <div class="home_card card_best_product">
                     <div class="card_header">
-                        <span class="card_label">Best Product (by Profit)</span>
+                        <span class="card_label">Best Product (over last month)</span>
                         <!-- Star SVG (outline) -->
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                             stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -89,12 +100,12 @@
                         <span class="star_icon">
 
                         </span>
-                        <span class="best_product_name" id="best_product_name">SWEETS</span>
+                        <span class="best_product_name" id="best_product_name"></span>
                     </div>
-                    <div class="best_product_profit">
-                        <span class="profit_badge" id="best_product_profit">+$2.00</span>
-                        <span class="profit_label">profit per unit</span>
-                    </div>
+                        <div class="profit_badge">
+                            <span>+Rs.</span>
+                            <span id="best_product_profit">0</span>
+                        </div>
                 </div>
 
                 <!-- Card: Stock Status -->
@@ -113,14 +124,14 @@
                     </div>
                     <div class="stock_values_row">
                         <div class="stock_block stock_active">
-                            <div class="stock_number" id="stock_active_count">120</div>
+                            <div class="stock_number" id="stock_active_count">0</div>
                             <div class="stock_status_label">
                                 <span class="status_dot dot_green"></span>
                                 Active
                             </div>
                         </div>
                         <div class="stock_block stock_out">
-                            <div class="stock_number" id="stock_out_count">5</div>
+                            <div class="stock_number" id="stock_out_count">0</div>
                             <div class="stock_status_label">Out of Stock</div>
                         </div>
                     </div>
@@ -129,7 +140,7 @@
             </div><!-- /.cards_row -->
         </section>
 
-        <!-- ─── SALES SUMMARY SECTION ─── -->
+        <!-- SALES SUMMARY SECTION  -->
         <section class="home_section sales_summary">
             <h2 class="section_heading">SALES SUMMARY</h2>
 
@@ -153,11 +164,17 @@
                     </div>
                     <div class="card_row_detail">
                         <span class="detail_label">Today Sales:</span>
-                        <span class="detail_value" id="today_sales">$345.00</span>
+                        <span class="detail_value">
+                            <span>Rs.</span>
+                            <span id="today_sales"></span>
+                        </span>
                     </div>
                     <div class="card_row_detail">
                         <span class="detail_label">Today Profit:</span>
-                        <span class="detail_value" id="today_profit">$120.00</span>
+                        <span class="detail_value">
+                            <span>Rs.</span>
+                            <span id="today_profit"></span>
+                        </span>
                     </div>
                 </div>
 
@@ -176,11 +193,17 @@
                     </div>
                     <div class="card_row_detail">
                         <span class="detail_label">Total Sales:</span>
-                        <span class="detail_value" id="monthly_sales">$3,210.00</span>
+                        <span class="detail_value">
+                            <span>Rs.</span>
+                            <span  id="month_sales">0</span>
+                        </span>
                     </div>
                     <div class="card_row_detail">
                         <span class="detail_label">Total Profit:</span>
-                        <span class="detail_value" id="monthly_profit">$950.00</span>
+                        <span class="detail_value">
+                            <span>Rs.</span>
+                            <span id="month_profit"></span>
+                        </span>
                     </div>
                 </div>
 
@@ -202,11 +225,17 @@
                     </div>
                     <div class="card_row_detail">
                         <span class="detail_label">Yearly Sales:</span>
-                        <span class="detail_value" id="yearly_sales">$45,000.00</span>
+                        <span class="detail_value">
+                            <span>Rs.</span>
+                            <span  id="year_sales"></span>
+                        </span>
                     </div>
                     <div class="card_row_detail">
                         <span class="detail_label">Yearly Profit:</span>
-                        <span class="detail_value" id="yearly_profit">$15,000.00</span>
+                        <span class="detail_value">
+                            <span>Rs.</span>
+                            <span id="year_profit"></span>
+                        </span>
                     </div>
                 </div>
 

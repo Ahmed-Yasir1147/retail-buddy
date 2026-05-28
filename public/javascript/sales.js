@@ -8,6 +8,8 @@ const saleTotalPrice = document.querySelector("#sale_total_price");
 const saleTotalProfit = document.querySelector("#sale_total_profit");
 const createSaleBtn = document.querySelector("#sale_dialog_submit");
 const salesTableBody = document.querySelector("#sales_table_body");
+const salesTotalPrice = document.querySelector("#sales_total_price");
+const salesTotalProfit = document.querySelector("#sales_total_profit");
 const baseUrl = "http://localhost:8000";
 const productEndpoint = `${baseUrl}/api/products`;
 const saleEndpoint = `${baseUrl}/api/sales`;
@@ -205,7 +207,7 @@ function createSale() {
         // prodcuts required structure: [{"id": "", "quantity": "", "name": ""}, ...]
         const products = [];
         for (const product of cartProducts) {
-            products.push({ id: product.id, quantity: product.quantity, name: product.name });
+            products.push({ id: product.id, quantity: product.quantity, name: product.name, profit: product.price - product.cost });
         }
         fetch(saleEndpoint, {
             method: "POST",
@@ -239,9 +241,14 @@ function fetchTodaySales() {
         } else {
             console.log("Sales fetch failed");
         }
-    }).then((sales) => {
+    }).then((response) => {
+        /*
+          Reponse structure:
+          { sales: [{_id: , products: , price: , profit: , time: }], 
+            summary: {totalPrice: , totalProfit: }}
+        */
         salesTableBody.innerHTML = "";
-        for (const sale of sales) {
+        for (const sale of response.sales) {
             /* Structure of tr element:
               Five tds for Id, Time, Products, Price, Profit
             */
@@ -273,6 +280,8 @@ function fetchTodaySales() {
             tr.appendChild(profit);
             salesTableBody.appendChild(tr);
         }
+        salesTotalPrice.textContent = response.summary.totalPrice;
+        salesTotalProfit.textContent = response.summary.totalProfit;
     }).catch((error) => {
         console.log(error);
     });
