@@ -1071,3 +1071,19 @@ body {
   gap: 10px;
   flex-shrink: 0;
 }
+
+/*
+   GRAPH PAGE
+*/
+.graph_card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  box-shadow: var(--card-shadow);
+  padding: 24px;
+  width: 100%;
+}
+
+#graph_canvas {
+  width: 100%;
+}

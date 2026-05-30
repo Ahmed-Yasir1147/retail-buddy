@@ -18,6 +18,8 @@ getAvailableYears();
 
 changeAnalyticsButtonsVisibility();
 
+setAnalyticsDays();
+
 analyticsTimeRange.addEventListener("click", changeAnalyticsButtonsVisibility);
 analyticsMonth.addEventListener("click", setAnalyticsDays);
 analyticsYear.addEventListener("click", setAnalyticsDays);
@@ -118,6 +120,7 @@ function fetchSales() {
             endpoint += `?year=${analyticsYear.value}&month=${analyticsMonth.value}&day=${analyticsDay.value}`;
 
     }
+    console.log(endpoint);
     fetch(endpoint, {
         method: "GET"
     }).then((response) => {
@@ -127,7 +130,14 @@ function fetchSales() {
             throw new Error("Fetching sales failed");
         }
     }).then((json) => {
-        console.log(json);
+        /* Structure of json:
+        {
+            sales: {time: , price: , profit: }, 
+            summary: {totalPrice: , totalProfit: }
+        }
+        here time name will be different for different time range and in daily, another attribute
+        products will be there
+        */
         analyticsTableHeadRow.innerHTML = "";
         analyticsTableBody.innerHTML = "";
         analyticsTableTotalsRow.innerHTML = "";
@@ -206,6 +216,8 @@ function displayAggregateSales(json) {
 function displayDailySales(json) {
     const rangeType = analyticsTimeRange.value;
     // table header
+    const id = document.createElement("th");
+    id.textContent = "Id";
     const time = document.createElement("th");
     time.textContent = "Time";
     const products = document.createElement("th");
@@ -214,6 +226,7 @@ function displayDailySales(json) {
     price.textContent = "Price";
     const profit = document.createElement("th");
     profit.textContent = "Profit";
+    analyticsTableHeadRow.appendChild(id);
     analyticsTableHeadRow.appendChild(time);
     analyticsTableHeadRow.appendChild(products);
     analyticsTableHeadRow.appendChild(price);
@@ -223,6 +236,8 @@ function displayDailySales(json) {
     */
     for (const sale of json.sales) {
         const tr = document.createElement("tr");
+        const id = document.createElement("td");
+        id.textContent = sale._id.slice(sale._id.length - 5);
         const timeUnit = document.createElement("td");
         const createdAt = new Date(sale.createdAt).toLocaleTimeString('en-US', {
             hour: 'numeric',
@@ -240,6 +255,7 @@ function displayDailySales(json) {
         price.textContent = sale.price;
         const profit = document.createElement("td");
         profit.textContent = sale.profit;
+        tr.appendChild(id);
         tr.appendChild(timeUnit);
         tr.appendChild(products);
         tr.appendChild(price);
@@ -248,7 +264,7 @@ function displayDailySales(json) {
     }
     // footer
     const totalText = document.createElement("td");
-    totalText.colSpan = 2;
+    totalText.colSpan = 3;
     totalText.textContent = "TOTAL";
     const totalPrice = document.createElement("td");
     totalPrice.textContent = json.summary.totalPrice;

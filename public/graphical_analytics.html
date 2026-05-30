@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Retail System — Tabular Analytics</title>
+  <title>Retail System — Graphs</title>
   <link rel="stylesheet" href="css/style.css" />
-  <script src="javascript/tabular_analytics.js" defer></script>
+  <script src="javascript/graphical_analytics.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-
 <body>
 
-  <!-- NAV -->
+  <!-- HEADER / NAV -->
   <header class="site_header">
     <nav class="navbar">
       <div class="nav_brand">RETAIL SYSTEM</div>
@@ -19,8 +18,8 @@
         <li><a href="index.html" class="nav_link">HOME</a></li>
         <li><a href="sales.html" class="nav_link">SALES</a></li>
         <li><a href="products.html" class="nav_link">PRODUCTS</a></li>
-        <li><a href="tabular_analytics.html" class="nav_link active">TABULAR ANALYTICS</a></li>
-        <li><a href="graphs.html" class="nav_link">GRAPHICAL ANALYTICS</a></li>
+        <li><a href="tabular_analytics.html" class="nav_link">TABULAR ANALYTICS</a></li>
+        <li><a href="graphs.html" class="nav_link active">GRAPHICAL ANALYTICS</a></li>
       </ul>
     </nav>
   </header>
@@ -31,23 +30,20 @@
     <!-- FILTER BAR -->
     <div class="filter_bar">
 
-      <!-- Time Range Dropdown (left) -->
       <div class="filter_left">
-        <select class="filter_select filter_timerange" id="analytics_timerange">
-          <option value="lifetime" selected>Lifetime</option>
+        <select class="filter_select" id="graph_timerange">
+          <option value="lifetime">Lifetime</option>
           <option value="yearly">Yearly</option>
-          <option value="monthly">Montly</option>
-          <option value="daily">Daily</option>
+          <option value="monthly">Monthly</option>
         </select>
       </div>
 
-      <!-- Year / Month / Day Dropdowns (right) -->
       <div class="filter_right">
-        <select class="filter_select filter_time" id="analytics_year">
-
+        <select class="filter_select filter_teal" id="graph_year">
+          
         </select>
 
-        <select class="filter_select filter_time" id="analytics_month">
+        <select class="filter_select filter_teal" id="graph_month">
           <option value="1">January</option>
           <option value="2">February</option>
           <option value="3">March</option>
@@ -61,43 +57,21 @@
           <option value="11">November</option>
           <option value="12">December</option>
         </select>
-
-        <select class="filter_select filter_time" id="analytics_day">
-        </select>
       </div>
 
     </div>
 
-    <!-- TABLE -->
-    <div class="table_wrapper">
-      <table class="data_table" id="analytics_table">
-        <thead>
-          <tr id="analytics_table_head">
-
-          </tr>
-        </thead>
-        <tbody id="analytics_table_body">
-
-
-        </tbody>
-
-        <!-- TOTALS ROW -->
-        <tfoot>
-          <tr class="table_totals_row" id="table_totals_row">
-
-          </tr>
-        </tfoot>
-
-      </table>
+    <!-- GRAPH AREA -->
+    <div class="graph_card" id="graph_card">
+      <canvas id="graph_canvas"></canvas>
     </div>
 
   </main>
 
   <!-- FOOTER -->
-  <footer class="site_footer">
-    <span class="footer_text">Retail Buddy | Semester Project | 2026</span>
-  </footer>
+    <footer class="site_footer">
+        <span class="footer_text">Retail Buddy | Semester Project | 2026</span>
+    </footer>
 
 </body>
-
 </html>
