@@ -11,23 +11,42 @@ const productForm = document.querySelector("#create_product_form");
 const productTableBody = document.querySelector("#product_table_body");
 const baseUrl = "http://localhost:8000";
 const url = `${baseUrl}/api/products`;
+let isEditing = false;
+let currentProductId;
 
 fetchProducts();
 
-// product dialog and it's button have to be used for both
-// creating and editing products
-// we update title, btn text and event listener everytime before usage
-showProductDialogBtn.addEventListener("click", () => {
-    productDialogTitle.textContent = "Add product";
-    createEditProductBtn.textContent = "Create";
-    productForm.addEventListener("submit", createProduct, { once: true });
-    productDialog.showModal();
-});
+
+showProductDialogBtn.addEventListener("click", showCreateProductDialog);
 
 cancelProductBtn.addEventListener("click", () => {
     productDialog.close();
 });
 
+productForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (isEditing) {
+        editProduct();
+    } else {
+        createProduct();
+    }
+});
+
+// product dialog and it's button have to be used for both
+// creating and editing products
+// we update title, btn text and event listener everytime before usage
+function showCreateProductDialog() {
+    isEditing = false;
+    productDialog.close();
+    // removing any data from uncompleted editing
+    productName.value = "";
+    productPrice.value = "";
+    productCost.value = "";
+    productStock.value = "";
+    productDialogTitle.textContent = "Add product";
+    createEditProductBtn.textContent = "Create";
+    productDialog.showModal();
+}
 
 
 function fetchProducts() {
@@ -61,7 +80,7 @@ function fetchProducts() {
             editButton.classList.add("btn_edit");
             editButton.addEventListener("click", (event) => {
                 event.preventDefault();
-                editProduct(product)
+                showEditProductDialog(product)
             });
             editButton.textContent = "Edit";
             const deleteButton = document.createElement("button");
@@ -101,8 +120,7 @@ function deleteProduct(id) {
     }
 }
 
-function createProduct(event) {
-    event.preventDefault();
+function createProduct() {
     const name = productName.value;
     const price = parseFloat(productPrice.value);
     const cost = parseFloat(productCost.value);
@@ -130,10 +148,6 @@ function createProduct(event) {
                 // products have changed so fetching again
                 fetchProducts();
                 productDialog.close();
-                productName.value = "";
-                productPrice.value = "";
-                productCost.value = "";
-                productStock.value = "";
             } else {
                 throw new Error("Product creation failed");
             }
@@ -143,56 +157,54 @@ function createProduct(event) {
     }
 }
 
-function editProduct(product) {
+function showEditProductDialog(product) {
+    isEditing = true;
     // setting dialog for editing
     productDialogTitle.textContent = "Edit product";
     createEditProductBtn.textContent = "Edit";
     // adding the existing value of properties of product
+    currentProductId = product._id;
     productName.value = product.name;
     productPrice.value = product.price;
     productCost.value = product.cost;
     productStock.value = product.stock;
-    productForm.addEventListener("submit", (event) => {
-        event.preventDefault();
-        const name = productName.value;
-        const price = parseFloat(productPrice.value);
-        const cost = parseFloat(productCost.value);
-        const stock = parseInt(productStock.value);
-        if (cost > price) {
-            alert("Cost of product can't be greater than price!");
-        } else {
-            fetch(`${url}/${product._id}`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body:
-                    JSON.stringify(
-                        {
-                            name: name,
-                            price: price,
-                            cost: cost,
-                            stock: stock
-                        }
-                    )
-
-            }).then((response) => {
-                if (response.ok) {
-                    fetchProducts();
-                    productDialog.close();
-                    productName.value = "";
-                    productPrice.value = "";
-                    productCost.value = "";
-                    productStock.value = "";
-                } else {
-                    throw new Error("Product updation failed");
-                }
-            }).catch((error) => {
-                console.error(error);
-            });
-        }
-    }, { once: true });
     productDialog.showModal();
+}
+
+function editProduct() {
+    const name = productName.value;
+    const price = parseFloat(productPrice.value);
+    const cost = parseFloat(productCost.value);
+    const stock = parseInt(productStock.value);
+    if (cost > price) {
+        alert("Cost of product can't be greater than price!");
+    } else {
+        fetch(`${url}/${currentProductId}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body:
+                JSON.stringify(
+                    {
+                        name: name,
+                        price: price,
+                        cost: cost,
+                        stock: stock
+                    }
+                )
+
+        }).then((response) => {
+            if (response.ok) {
+                fetchProducts();
+                productDialog.close();
+            } else {
+                throw new Error("Product updation failed");
+            }
+        }).catch((error) => {
+            console.error(error);
+        });
+    }
 }
 
 

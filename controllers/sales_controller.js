@@ -70,7 +70,9 @@ export const getSales = async (req, res, next) => {
         // If only year, all months of that year
         // If none, all years of lifetime
         // We return two things: raw sales + summary (total sales and profit)
-        if (year != null && month != null && day != null) {
+
+        // condition checks for nan and not null cause of parsing
+        if (!Number.isNaN(year) && !Number.isNaN(month) && !Number.isNaN(day)) {
             result = (await sales.aggregate([
                 {
                     // Adding a new field: dateParts: {year: , month: , day: , ...}
@@ -90,7 +92,7 @@ export const getSales = async (req, res, next) => {
                     }
                 }
             ]))[0];
-        } else if (year != null && month != null) {
+        } else if (!Number.isNaN(year) && !Number.isNaN(month)) {
             result = (await sales.aggregate([
                 { $addFields: { dateParts: { $dateToParts: { date: "$createdAt" } } } },
                 { $match: { "dateParts.year": year, "dateParts.month": month } },
@@ -117,7 +119,7 @@ export const getSales = async (req, res, next) => {
                 }
             }
             result.sales = s;
-        } else if (year != null) {
+        } else if (!Number.isNaN(year)) {
             result = (await sales.aggregate([
                 { $addFields: { dateParts: { $dateToParts: { date: "$createdAt" } } } },
                 { $match: { "dateParts.year": year } },
