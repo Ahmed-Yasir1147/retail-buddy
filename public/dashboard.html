@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Retail System</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="javascript/dashboard.js" defer></script>
+</head>
+
+<body>
+
+    <!-- 
+       HEADER / NAV
+  -->
+    <header class="site_header">
+        <nav class="navbar">
+            <div class="nav_brand">RETAIL BUDDY</div>
+            <ul class="nav_links">
+                <li><a href="dashboard.html" class="nav_link active">HOME</a></li>
+                <li><a href="sales.html" class="nav_link">SALES</a></li>
+                <li><a href="products.html" class="nav_link">PRODUCTS</a></li>
+                <li><a href="tabular_analytics.html" class="nav_link">TABULAR ANALYTICS</a></li>
+                <li><a href="graphical_analytics.html" class="nav_link">GRAPHICAL ANALYTICS</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 
+       MAIN BODY
+   -->
+    <main class="main_content">
+        <h1 class="page_title">DASHBOARD</h1>
+
+        <!-- ─── HIGHLIGHTS SECTION ─── -->
+        <section class="home_section highlights">
+            <h2 class="section_heading">HIGHLIGHTS</h2>
+
+            <div class="cards_row">
+
+                <!-- Card: Total Sales -->
+                <div class="home_card card_total_sales">
+                    <div class="card_header">
+                        <span class="card_label">Total Sales</span>
+                        <span class="card_icon">
+                            <!-- Trending-up arrow SVG -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
+                                fill="none" stroke="#1a9c7b" stroke-width="2.5" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                                <polyline points="17 6 23 6 23 12" />
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="card_value highlight_value">
+                        <span>Rs. </span>
+                        <span id="total_sales">0</span>
+                    </div>
+                    <div class="card_row_detail">
+                        <span class="detail_label">Total Profit:</span>
+                        <span class="detail_value">
+                            <span>Rs.</span>
+                            <span id="total_profit"></span>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Card: Total Products -->
+                <div class="home_card card_total_products">
+                    <div class="card_header">
+                        <span class="card_label">Total Products</span>
+                        <span class="card_icon">
+                            <!-- Box / package SVG -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
+                                fill="none" stroke="#555" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8
+                         a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                                <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+                                <line x1="12" y1="22.08" x2="12" y2="12" />
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="card_value highlight_value products_value" id="total_products">0</div>
+                </div>
+
+                <!-- Card: Best Product -->
+                <div class="home_card card_best_product">
+                    <div class="card_header">
+                        <span class="card_label">Best Product (over last month)</span>
+                        <!-- Star SVG (outline) -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02
+                                  12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                        </svg>
+                    </div>
+                    <div class="best_product_body">
+                        <span class="star_icon">
+
+                        </span>
+                        <span class="best_product_name" id="best_product_name"></span>
+                    </div>
+                        <div class="profit_badge">
+                            <span>+Rs.</span>
+                            <span id="best_product_profit">0</span>
+                        </div>
+                </div>
+
+                <!-- Card: Stock Status -->
+                <div class="home_card card_stock_status">
+                    <div class="card_header">
+                        <span class="card_label">Stock Status</span>
+                        <span class="stock_header_icons">
+                            <!-- Warehouse / storage SVG -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="#555" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+                                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="stock_values_row">
+                        <div class="stock_block stock_active">
+                            <div class="stock_number" id="stock_active_count">0</div>
+                            <div class="stock_status_label">
+                                <span class="status_dot dot_green"></span>
+                                Active
+                            </div>
+                        </div>
+                        <div class="stock_block stock_out">
+                            <div class="stock_number" id="stock_out_count">0</div>
+                            <div class="stock_status_label">Out of Stock</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- cards_row -->
+        </section>
+
+        <!-- SALES SUMMARY SECTION  -->
+        <section class="home_section sales_summary">
+            <h2 class="section_heading">SALES SUMMARY</h2>
+
+            <div class="cards_row">
+
+                <!-- Card: Today -->
+                <div class="home_card card_today_sales">
+                    <div class="card_header">
+                        <span class="card_label card_number">1) Today</span>
+                    </div>
+                    <div class="card_row_detail">
+                        <span class="detail_label">Today Sales:</span>
+                        <span class="detail_value">
+                            <span>Rs.</span>
+                            <span id="today_sales">0</span>
+                        </span>
+                    </div>
+                    <div class="card_row_detail">
+                        <span class="detail_label">Today Profit:</span>
+                        <span class="detail_value">
+                            <span>Rs.</span>
+                            <span id="today_profit">0</span>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Card: Last 30 Days -->
+                <div class="home_card card_monthly_sales">
+                    <div class="card_header">
+                        <span class="card_label card_number">2) Last 30 Days</span>
+                    </div>
+                    <div class="card_row_detail">
+                        <span class="detail_label">Total Sales:</span>
+                        <span class="detail_value">
+                            <span>Rs.</span>
+                            <span id="month_sales">0</span>
+                        </span>
+                    </div>
+                    <div class="card_row_detail">
+                        <span class="detail_label">Total Profit:</span>
+                        <span class="detail_value">
+                            <span>Rs.</span>
+                            <span id="month_profit">0</span>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Card: Last Year -->
+                <div class="home_card card_yearly_sales">
+                    <div class="card_header">
+                        <span class="card_label card_number">3) Last Year (365 Days)</span>
+                    </div>
+                    <div class="card_row_detail">
+                        <span class="detail_label">Yearly Sales:</span>
+                        <span class="detail_value">
+                            <span>Rs.</span>
+                            <span  id="year_sales">0</span>
+                        </span>
+                    </div>
+                    <div class="card_row_detail">
+                        <span class="detail_label">Yearly Profit:</span>
+                        <span class="detail_value">
+                            <span>Rs.</span>
+                            <span id="year_profit">0</span>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- QUICK ACTION BUTTONS  -->
+        <div class="buttons_row">
+            <a href="sales.html" class="home_button">Add Sale</a>
+            <a href="products.html" class="home_button">Add Product</a>
+            <a href="tabular_analytics.html" class="home_button">See Sales</a>
+            <a href="graphical_analytics.html" class="home_button">See Analytics</a>
+        </div>
+
+
+    </main>
+
+    <!-- 
+       FOOTER
+    -->
+    <footer class="site_footer">
+        <span class="footer_text">Retail Buddy | Semester Project | 2026</span>
+    </footer>
+
+</body>
+
+</html>

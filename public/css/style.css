@@ -1087,3 +1087,92 @@ body {
 #graph_canvas {
   width: 100%;
 }
+
+/*
+   LOGIN PAGE
+*/
+.login_body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.login_wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+}
+
+.login_card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  box-shadow: var(--card-shadow);
+  padding: 40px 36px;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.login_brand {
+  font-family: var(--font-condensed);
+  font-size: 1.9rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--nav-bg);
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.login_subtitle {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.login_fields {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 10px;
+}
+
+.login_btn {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--nav-bg);
+  color: #ffffff;
+  font-family: var(--font-condensed);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color var(--transition),
+              transform var(--transition),
+              box-shadow var(--transition);
+}
+
+.login_btn:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+.login_btn:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: none;
+}
+
+.incorrect_cred {
+  opacity: 0;
+  color: var(--red-out);
+  margin-bottom: 10px;
+  font-size: 1rem;
+}

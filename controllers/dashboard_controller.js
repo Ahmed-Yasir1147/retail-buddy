@@ -37,9 +37,9 @@ export const getDashboardProducts = async (req, res, next) => {
 
 export const getDashboardSales = async (req, res, next) => {
     try {
-        const totalAgg = await sales.aggregate([
+        const totalAgg = (await sales.aggregate([
             { $group: { _id: null, totalSales: { $sum: "$price" }, totalProfit: { $sum: "$profit" } } }
-        ]);
+        ]))[0];
         const now = new Date();
         const yearAgo = new Date();
         yearAgo.setFullYear(now.getFullYear - 1);
@@ -47,27 +47,28 @@ export const getDashboardSales = async (req, res, next) => {
         monthAgo.setMonth(now.getMonth() - 1);
         const todayStart = new Date();
         todayStart.setHours(0, 0, 0, 0);
-        const yearAgg = await sales.aggregate([
+        const yearAgg = (await sales.aggregate([
             { $match: { createdAt: { $gte: yearAgo, $lte: now } } },
             { $group: { _id: null, yearSales: { $sum: "$price" }, yearProfit: { $sum: "$profit" } } }
-        ]);
-        const monthAgg = await sales.aggregate([
+        ]))[0];
+        const monthAgg = (await sales.aggregate([
             { $match: { createdAt: { $gte: monthAgo, $lte: now } } },
             { $group: { _id: null, monthSales: { $sum: "$price" }, monthProfit: { $sum: "$profit" } } }
-        ]);
-        const dayAgg = await sales.aggregate([
+        ]))[0];
+        const dayAgg = (await sales.aggregate([
             { $match: { createdAt: { $gte: todayStart, $lte: now } } },
             { $group: { _id: null, daySales: { $sum: "$price" }, dayProfit: { $sum: "$profit" } } }
-        ]);
+        ]))[0];
+        // here null aware operator and optional 0 is necessary cause the agg's could be null
         res.status(200).json({
-            totalSales: totalAgg[0].totalSales,
-            totalProfit: totalAgg[0].totalProfit,
-            yearSales: yearAgg[0].yearSales,
-            yearProfit: yearAgg[0].yearProfit,
-            monthSales: monthAgg[0].monthSales,
-            monthProfit: monthAgg[0].monthProfit,
-            daySales: dayAgg[0].daySales,
-            dayProfit: dayAgg[0].dayProfit,
+            totalSales: totalAgg?.totalSales || 0,
+            totalProfit: totalAgg?.totalProfit || 0,
+            yearSales: yearAgg?.yearSales || 0,
+            yearProfit: yearAgg?.yearProfit || 0,
+            monthSales: monthAgg?.monthSales || 0,
+            monthProfit: monthAgg?.monthProfit || 0,
+            daySales: dayAgg?.daySales || 0,
+            dayProfit: dayAgg?.dayProfit || 0,
         });
     } catch (error) {
         return next(createError(new Error(error, 500)));
