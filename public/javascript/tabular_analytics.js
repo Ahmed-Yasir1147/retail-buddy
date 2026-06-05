@@ -1,3 +1,4 @@
+import { currency } from "./constants.js";
 
 const analyticsTimeRange = document.querySelector("#analytics_timerange");
 const analyticsYear = document.querySelector("#analytics_year");
@@ -168,9 +169,9 @@ function displayAggregateSales(json) {
             time.textContent = "Day";
     }
     const price = document.createElement("th");
-    price.textContent = "Price";
+    price.textContent = `Price(${currency})`;
     const profit = document.createElement("th");
-    profit.textContent = "Profit";
+    profit.textContent = `Profit(${currency})`;
     analyticsTableHeadRow.appendChild(time);
     analyticsTableHeadRow.appendChild(price);
     analyticsTableHeadRow.appendChild(profit);
@@ -223,9 +224,9 @@ function displayDailySales(json) {
     const products = document.createElement("th");
     products.textContent = "Products";
     const price = document.createElement("th");
-    price.textContent = "Price";
+    price.textContent = `Price(${currency})`;
     const profit = document.createElement("th");
-    profit.textContent = "Profit";
+    profit.textContent = `Profit(${currency})`;
     analyticsTableHeadRow.appendChild(id);
     analyticsTableHeadRow.appendChild(time);
     analyticsTableHeadRow.appendChild(products);

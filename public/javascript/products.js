@@ -1,3 +1,5 @@
+import { currency } from "./constants.js";
+
 const showProductDialogBtn = document.querySelector("#show_product_dialog_btn");
 const productDialog = document.querySelector("#product_dialog");
 const productDialogTitle = document.querySelector("#product_dialog_title");
@@ -9,6 +11,8 @@ const productCost = document.querySelector("#product_cost");
 const productStock = document.querySelector("#product_stock");
 const productForm = document.querySelector("#create_product_form");
 const productTableBody = document.querySelector("#product_table_body");
+const priceHeader = document.querySelector("#price_header");
+const profitHeader = document.querySelector("#profit_header");
 const baseUrl = "http://localhost:8000";
 const url = `${baseUrl}/api/products`;
 let isEditing = false;
@@ -16,6 +20,9 @@ let currentProductId;
 
 fetchProducts();
 
+// Suffxing currency where necesssary
+priceHeader.textContent = `${priceHeader.textContent}(${currency})`;
+profitHeader.textContent = `${profitHeader.textContent}(${currency})`;
 
 showProductDialogBtn.addEventListener("click", showCreateProductDialog);
 

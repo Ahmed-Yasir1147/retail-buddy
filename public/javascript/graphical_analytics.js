@@ -1,3 +1,5 @@
+import { currency } from "./constants.js";
+
 const graphTimeRange = document.querySelector("#graph_timerange");
 const graphYear = document.querySelector("#graph_year");
 const graphMonth = document.querySelector("#graph_month");
@@ -129,7 +131,7 @@ function drawGraph(json) {
     if (chart) {
         chart.destroy();
     }
-    let type = "line", xText, yText = "Amount in rupees", title;
+    let type = "line", xText, yText = `Amount (${currency})`, title;
     const labelFont = {
         family: "Arial",
         size: 16,

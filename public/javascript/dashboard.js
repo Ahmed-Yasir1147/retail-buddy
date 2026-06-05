@@ -1,3 +1,5 @@
+import { currency } from "./constants.js";
+
 const totalProductsDiv = document.querySelector("#total_products");
 const stockActiveDiv = document.querySelector("#stock_active_count");
 const stockOutDiv = document.querySelector("#stock_out_count");
@@ -31,11 +33,11 @@ function displayDashboardSummary() {
           JSON response structure: 
           {totalProductsCount: , stockActiveProductsCount: , stockOutProductsCount:, bestProduct: {name: , profit: } }
         */
-        animateCounter(totalProductsDiv, json.totalProductsCount);
-        animateCounter(stockActiveDiv, json.stockActiveProductsCount);
-        animateCounter(stockOutDiv, json.stockOutProductsCount);
+        animateCounter(totalProductsDiv, json.totalProductsCount, "");
+        animateCounter(stockActiveDiv, json.stockActiveProductsCount, "");
+        animateCounter(stockOutDiv, json.stockOutProductsCount, "");
         bestProductNameSpan.textContent =  json.bestProduct.name;
-        animateCounter(bestProductProfitSpan, json.bestProduct.profit);
+        animateCounter(bestProductProfitSpan, json.bestProduct.profit, `+${currency}`);
     }).catch((error) => {
         console.log(error);
     });
@@ -53,22 +55,22 @@ function displayDashboardSummary() {
           JSON response structure: 
           {totalSales: , totalProfit: , yearSales: , yearProfit: , ...}
         */
-        animateCounter(totalSalesSpan, json.totalSales);
-        animateCounter(totalProfitSpan, json.totalProfit);
-        animateCounter(yearSalesSpan, json.yearSales);
-        animateCounter(yearProfitSpan, json.yearProfit);
-        animateCounter(monthProfitSpan, json.monthProfit);
-        animateCounter(monthSalesSpan, json.monthSales);
-        animateCounter(daySalesSpan, json.daySales);
-        animateCounter(dayProfitSpan, json.dayProfit);
+        animateCounter(totalSalesSpan, json.totalSales, currency);
+        animateCounter(totalProfitSpan, json.totalProfit, currency);
+        animateCounter(yearSalesSpan, json.yearSales, currency);
+        animateCounter(yearProfitSpan, json.yearProfit, currency);
+        animateCounter(monthProfitSpan, json.monthProfit, currency);
+        animateCounter(monthSalesSpan, json.monthSales, currency);
+        animateCounter(daySalesSpan, json.daySales, currency);
+        animateCounter(dayProfitSpan, json.dayProfit, currency);
     }).catch((error) => {
         console.log(error);
     })
 }
 
 
-
-function animateCounter(element, target) {
+// Here prefix is used to add currency where necessary
+function animateCounter(element, target, prefix) {
     /* This function has two parts:
     Setting of animation: We specify duration. During each call of animate(),
     we calculate current time passed and check if desired duration has passed, otherwise call again
@@ -83,7 +85,7 @@ function animateCounter(element, target) {
         }
         const progress = timestamp - startTime;
         const value = Math.min((progress / duration) * target, target);
-        element.textContent = Math.floor(value);
+        element.textContent = prefix + Math.floor(value);
         if (progress < duration) {
             requestAnimationFrame(animate);
         }

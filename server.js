@@ -2,7 +2,7 @@ import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { productsRouter } from './routes/products.js';
-import { errorHandler } from '../ExpressJs/middleware/error_handler.js';
+import { errorHandler } from './middleware/error_handler.js';
 import { notFoundErrorHanlder } from './middleware/not_found_handler.js';
 import { logger } from './middleware/logger.js';
 import { main } from './config/database.js';
