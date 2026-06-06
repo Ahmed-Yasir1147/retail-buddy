@@ -5,11 +5,144 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Retail System — Tabular Analytics</title>
+   <!-- It is required because html2pdf can't read external css-->
+  <style>
+    #receipt_hider {
+      position: fixed;
+      left: -10000px;
+      top: 0;
+    }
+
+    #receipt_template {
+      font-family: Arial, sans-serif;
+      width: 300px;
+      min-height: 400px;
+      padding: 28px 20px;
+      background-color: #ffffff;
+      box-sizing: border-box;
+
+    }
+
+    .receipt_title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: #1a202c;
+      margin-bottom: 4px;
+      text-align: center;
+    }
+
+    .receipt_datetime {
+      font-size: 0.75rem;
+      color: #718096;
+      text-align: right;
+      margin-bottom: 10px;
+    }
+
+    /* ─── Table ─── */
+    .receipt_table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 5px;
+    }
+
+    .receipt_table thead tr {
+      border-top: 1.5px solid #1a202c;
+      border-bottom: 1.5px solid #1a202c;
+    }
+
+    .receipt_table thead th {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #1a202c;
+      padding: 7px 4px;
+      text-align: left;
+    }
+
+    .receipt_table thead th:last-child,
+    .receipt_table tbody td:last-child {
+      text-align: right;
+    }
+
+    .receipt_table thead th:nth-child(2),
+    .receipt_table tbody td:nth-child(2) {
+      text-align: center;
+    }
+
+    .receipt_table tbody tr:last-child {
+      border-bottom: 1.5px solid #1a202c;
+      margin-bottom: 8px;
+    }
+
+    .receipt_table tbody td {
+      font-size: 0.78rem;
+      color: #2d3748;
+      padding: 4px 4px;
+    }
+
+    /* Footer */
+
+    .receipt_total {
+      padding-top: 4px;
+      padding-bottom: 4px;
+    }
+
+    .receipt_total_label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #1a202c;
+      
+    }
+
+    .receipt_total_value {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #1a202c;
+      text-align: right;
+    }
+
+    .receipt_footer {
+      border-bottom: 1.5px solid #1a202c;
+    }
+  </style>
   <link rel="stylesheet" href="css/style.css" />
+  <!-- html2pdf for receipt generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script src="javascript/tabular_analytics.js" type="module" defer></script>
 </head>
 
 <body>
+
+  <!-- RECEIPT TEMPLATE -->
+
+  <div id="receipt_hider">
+    <div id="receipt_template">
+
+      <h1 class="receipt_title">Retail Buddy</h1>
+
+      <p class="receipt_datetime" id="receipt_datetime">24 May 2026 — 14:35</p>
+
+      <table class="receipt_table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Qty</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody id="receipt_table_body">
+
+        </tbody>
+        <tfoot class="receipt_footer">
+          <tr>
+            <td colspan="2" class="receipt_total receipt_total_label">Total: </td>
+            <td id="receipt_total" class="receipt_total receipt_total_value"></td>
+          </tr>
+        </tfoot>
+      </table>
+
+    </div>
+  </div>
 
   <!-- NAV -->
   <header class="site_header">

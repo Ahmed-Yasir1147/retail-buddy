@@ -1,4 +1,5 @@
-import { currency } from "./constants.js";
+import { currency, salesEndpoint, productsEndpoint } from "./constants.js";
+import { receiptGenerator } from "./helpers.js";
 
 const showSaleDialogBtn = document.querySelector("#show_sale_dialog_btn");
 const saleDialog = document.querySelector("#sale_dialog");
@@ -14,9 +15,6 @@ const salesTotalPrice = document.querySelector("#sales_total_price");
 const salesTotalProfit = document.querySelector("#sales_total_profit");
 const priceHeader = document.querySelector("#price_header");
 const profitHeader = document.querySelector("#profit_header");
-const baseUrl = "http://localhost:8000";
-const productEndpoint = `${baseUrl}/api/products`;
-const saleEndpoint = `${baseUrl}/api/sales`;
 // we need to store products to search and restore after search
 let fetchedProducts;
 let cartProducts = [];
@@ -65,7 +63,7 @@ function searchProducts() {
 }
 
 function fetchProducts() {
-    fetch(productEndpoint, {
+    fetch(productsEndpoint, {
         method: "GET"
     }).then((response) => {
         if (response.ok) {
@@ -216,9 +214,9 @@ function createSale() {
         // prodcuts required structure: [{"id": "", "quantity": "", "name": ""}, ...]
         const products = [];
         for (const product of cartProducts) {
-            products.push({ id: product.id, quantity: product.quantity, name: product.name, profit: product.price - product.cost });
+            products.push({ id: product.id, quantity: product.quantity, name: product.name, price: product.price, profit: product.price - product.cost });
         }
-        fetch(saleEndpoint, {
+        fetch(salesEndpoint, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -245,7 +243,7 @@ function createSale() {
 
 function fetchTodaySales() {
     const now = new Date();
-    const endpoint = `${saleEndpoint}?year=${now.getFullYear()}&month=${now.getMonth() + 1}&day=${now.getDate()}`;
+    const endpoint = `${salesEndpoint}?year=${now.getFullYear()}&month=${now.getMonth() + 1}&day=${now.getDate()}`;
     fetch(endpoint, { method: "GET" }).then((response) => {
         if (response.ok) {
             return response.json();
@@ -286,11 +284,16 @@ function fetchTodaySales() {
             price.textContent = sale.price;
             const profit = document.createElement("td");
             profit.textContent = sale.profit;
+            const receipt = document.createElement("button");
+            receipt.textContent = "Receipt";
+            receipt.classList.add("btn_receipt");
+            receipt.addEventListener("click", () => {receiptGenerator(sale)});
             tr.appendChild(id);
             tr.appendChild(time)
             tr.appendChild(products);
             tr.appendChild(price);
             tr.appendChild(profit);
+            tr.appendChild(receipt);
             salesTableBody.appendChild(tr);
         }
         salesTotalPrice.textContent = json.summary.totalPrice;
@@ -300,6 +303,5 @@ function fetchTodaySales() {
     });
 
 }
-
 
 

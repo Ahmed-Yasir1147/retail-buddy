@@ -1,4 +1,4 @@
-import { currency } from "./constants.js";
+import { currency, baseUrl, productsDashboardEndpoint, salesDashboardEndpoint } from "./constants.js";
 
 const totalProductsDiv = document.querySelector("#total_products");
 const stockActiveDiv = document.querySelector("#stock_active_count");
@@ -13,9 +13,7 @@ const dayProfitSpan = document.querySelector("#today_profit");
 const daySalesSpan = document.querySelector("#today_sales");
 const bestProductNameSpan = document.querySelector("#best_product_name");
 const bestProductProfitSpan = document.querySelector("#best_product_profit");
-const baseUrl = "http://localhost:8000";
-const productsDashboardEndpoint = `${baseUrl}/api/dashboard/products`;
-const salesDashboardEndpoint = `${baseUrl}/api/dashboard/sales`;
+
 
 displayDashboardSummary();
 

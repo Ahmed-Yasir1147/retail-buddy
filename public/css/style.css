@@ -781,7 +781,8 @@ body {
   justify-content: center;
   margin: auto;
   animation: dialog_in 0.2s ease;
-  border-radius: var(--radius);;
+  border-radius: var(--radius);
+  ;
   border: none;
   background-color: var(--bg-page);
   height: 70%;
@@ -1155,8 +1156,8 @@ body {
   border-radius: 6px;
   cursor: pointer;
   transition: background-color var(--transition),
-              transform var(--transition),
-              box-shadow var(--transition);
+    transform var(--transition),
+    box-shadow var(--transition);
 }
 
 .login_btn:hover {
@@ -1175,4 +1176,33 @@ body {
   color: var(--red-out);
   margin-bottom: 10px;
   font-size: 1rem;
+}
+
+/*
+   RECEIPT BUTTON
+*/
+.btn_receipt {
+  background-color: hsl(0, 5%, 92%);
+  color: var(--text-primary);
+  border: none;
+  border-radius: 6px;
+  padding: 8px;
+  margin: 8px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color var(--transition),
+    transform var(--transition),
+    box-shadow var(--transition);
+}
+
+.btn_receipt:hover {
+  transform: translateY(-1px) scale(1.025);
+}
+
+.btn_receipt:active {
+  transform: translateY(0) scale(0.97);
+  box-shadow: none;
 }

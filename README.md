@@ -32,6 +32,7 @@ Retail Buddy aims to digitalize these operations by providing a simple platform 
 
 ### Sales Management
 - Generate sales transactions
+- Generate receipts
 - Maintenance of stock quantities
 
 ### Dashboard

@@ -1,4 +1,4 @@
-import { currency } from "./constants.js";
+import { currency, productsEndpoint } from "./constants.js";
 
 const showProductDialogBtn = document.querySelector("#show_product_dialog_btn");
 const productDialog = document.querySelector("#product_dialog");
@@ -13,8 +13,6 @@ const productForm = document.querySelector("#create_product_form");
 const productTableBody = document.querySelector("#product_table_body");
 const priceHeader = document.querySelector("#price_header");
 const profitHeader = document.querySelector("#profit_header");
-const baseUrl = "http://localhost:8000";
-const url = `${baseUrl}/api/products`;
 let isEditing = false;
 let currentProductId;
 
@@ -57,7 +55,7 @@ function showCreateProductDialog() {
 
 
 function fetchProducts() {
-    fetch(url, {
+    fetch(productsEndpoint, {
         method: "GET"
     }).then((response) => {
         if (response.ok) {
@@ -113,7 +111,7 @@ function fetchProducts() {
 function deleteProduct(id) {
     // confirming if user really wants to delete
     if (confirm("Do you want to delete this product?")) {
-        fetch(`${url}/${id}`, {
+        fetch(`${productsEndpoint}/${id}`, {
             method: "DELETE"
         }).then((response) => {
             if (response.ok) {
@@ -137,7 +135,7 @@ function createProduct() {
     if (cost > price) {
         alert("Cost of product can't be greater than price!");
     } else {
-        fetch(url, {
+        fetch(productsEndpoint, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -186,7 +184,7 @@ function editProduct() {
     if (cost > price) {
         alert("Cost of product can't be greater than price!");
     } else {
-        fetch(`${url}/${currentProductId}`, {
+        fetch(`${productsEndpoint}/${currentProductId}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"

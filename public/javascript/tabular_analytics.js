@@ -1,4 +1,5 @@
-import { currency } from "./constants.js";
+import { currency, salesEndpoint } from "./constants.js";
+import { receiptGenerator } from "./helpers.js";
 
 const analyticsTimeRange = document.querySelector("#analytics_timerange");
 const analyticsYear = document.querySelector("#analytics_year");
@@ -8,8 +9,6 @@ const analyticsTableHeadRow = document.querySelector("#analytics_table_head");
 const analyticsTableBody = document.querySelector("#analytics_table_body");
 const analyticsTableTotalsRow = document.querySelector("#table_totals_row");
 
-const baseUrl = "http://localhost:8000";
-const saleEndpoint = `${baseUrl}/api/sales`;
 
 // fetching sales when screen loads
 fetchSales();
@@ -88,7 +87,7 @@ function setAnalyticsDays() {
 }
 
 function getAvailableYears() {
-    fetch(`${saleEndpoint}/years`, {
+    fetch(`${salesEndpoint}/years`, {
         method: "GET"
     }).then((response) => {
         if (response.ok) {
@@ -109,7 +108,7 @@ function getAvailableYears() {
 }
 
 function fetchSales() {
-    let endpoint = saleEndpoint;
+    let endpoint = salesEndpoint;
     switch (analyticsTimeRange.value) {
         case "yearly":
             endpoint += `?year=${analyticsYear.value}`;
@@ -227,11 +226,14 @@ function displayDailySales(json) {
     price.textContent = `Price(${currency})`;
     const profit = document.createElement("th");
     profit.textContent = `Profit(${currency})`;
+    const action = document.createElement("th");
+    action.textContent = "Action";
     analyticsTableHeadRow.appendChild(id);
     analyticsTableHeadRow.appendChild(time);
     analyticsTableHeadRow.appendChild(products);
     analyticsTableHeadRow.appendChild(price);
     analyticsTableHeadRow.appendChild(profit);
+    analyticsTableHeadRow.appendChild(action);
     /* Structure of element of table body
         tr which has four td's for time, products, price and profit
     */
@@ -256,11 +258,16 @@ function displayDailySales(json) {
         price.textContent = sale.price;
         const profit = document.createElement("td");
         profit.textContent = sale.profit;
+        const receipt = document.createElement("button");
+        receipt.textContent = "Receipt";
+        receipt.classList.add("btn_receipt");
+        receipt.addEventListener("click", () => {receiptGenerator(sale)});
         tr.appendChild(id);
         tr.appendChild(timeUnit);
         tr.appendChild(products);
         tr.appendChild(price);
         tr.appendChild(profit);
+        tr.appendChild(receipt);
         analyticsTableBody.appendChild(tr);
     }
     // footer
@@ -271,9 +278,11 @@ function displayDailySales(json) {
     totalPrice.textContent = json.summary.totalPrice;
     const totalProfit = document.createElement("td");
     totalProfit.textContent = json.summary.totalProfit;
+    const empty = document.createElement("td");
     analyticsTableTotalsRow.appendChild(totalText);
     analyticsTableTotalsRow.appendChild(totalPrice);
     analyticsTableTotalsRow.appendChild(totalProfit);
+    analyticsTableTotalsRow.appendChild(empty);
 
 }
 

@@ -1,12 +1,10 @@
-import { currency } from "./constants.js";
+import { currency, salesEndpoint } from "./constants.js";
 
 const graphTimeRange = document.querySelector("#graph_timerange");
 const graphYear = document.querySelector("#graph_year");
 const graphMonth = document.querySelector("#graph_month");
 const graphCanvas = document.querySelector("#graph_canvas");
 
-const baseUrl = "http://localhost:8000";
-const saleEndpoint = `${baseUrl}/api/sales`;
 
 // reference to chart to destroy it before creating a new chart
 let chart;
@@ -73,7 +71,7 @@ function setAnalyticsDays() {
 }
 
 function getAvailableYears() {
-    fetch(`${saleEndpoint}/years`, {
+    fetch(`${salesEndpoint}/years`, {
         method: "GET"
     }).then((response) => {
         if (response.ok) {
@@ -94,7 +92,7 @@ function getAvailableYears() {
 }
 
 function fetchSales() {
-    let endpoint = saleEndpoint;
+    let endpoint = salesEndpoint;
     switch (graphTimeRange.value) {
         case "yearly":
             endpoint += `?year=${graphYear.value}`;
